@@ -1,6 +1,9 @@
-version: 1.1.5
+version: 1.1.6
 cache: true
 
+# =========================================================
+# CONFIGURAÇÃO DE ARQUIVOS (PDFs grandes, prints, códigos)
+# =========================================================
 fileConfig:
   endpoints:
     default:
@@ -12,6 +15,9 @@ fileConfig:
         - "application/pdf"
         - "text/.*"
 
+# =========================================================
+# INTERFACE LIMPA PARA USO DOMÉSTICO
+# =========================================================
 interface:
   customWelcome: 'Olá! 👋 Escolha uma opção no menu "Mudar Modelo" (ex: Padrão Diário).'
 
@@ -27,6 +33,9 @@ interface:
     externalUrl: "https://librechat.ai/tos"
     openNewTab: true
 
+# =========================================================
+# MODEL SPECS (PERSONAS OFICIAIS)
+# =========================================================
 modelSpecs:
   enforce: true
   prioritize: true
@@ -34,63 +43,74 @@ modelSpecs:
 
     - name: "family-fast"
       label: "🌟 Padrão Diário (Rápido)"
+      description: "Para o dia a dia: receitas, ideias, e-mails e dúvidas gerais."
       default: true
-      description: "Receitas, ideias, e-mails e dúvidas gerais."
       preset:
         endpoint: "google"
         model: "gemini-2.5-flash-lite"
         temperature: 0.6
         max_tokens: 1200
         promptPrefix: |
-          Você é um assistente da família, simpático e direto.
+          Você é um assistente da família, simpático, direto e prestativo.
           Responda sempre em Português do Brasil.
           Use linguagem simples e emojis com moderação.
+          Se faltar informação, faça uma pergunta objetiva.
 
     - name: "advanced-gpt4o"
       label: "🚀 Avançado (GPT-4o)"
+      description: "Inteligência máxima para raciocínio complexo, lógica e análises profundas."
       preset:
         endpoint: "openai"
         model: "gpt-4o"
         temperature: 0.5
         max_tokens: 3500
         promptPrefix: |
-          Responda em Português do Brasil com profundidade e precisão.
-          Declare incerteza quando houver risco de erro.
+          Responda em Português do Brasil com profundidade, precisão e boa estrutura.
+          Se houver risco de erro, declare incerteza.
 
     - name: "study-law-pro"
       label: "📚 Estudo & Leis (Gemini Pro)"
+      description: "Ideal para leitura de editais, leis, PDFs grandes e resumos para concurso."
       preset:
         endpoint: "google"
         model: "gemini-2.5-pro"
         temperature: 0.2
         max_tokens: 8000
         promptPrefix: |
-          Professor especialista em concursos e direito.
-          Só cite artigo quando tiver certeza absoluta.
-          Priorize fidelidade ao texto fornecido.
+          Você é um professor especialista em concursos públicos e Direito.
+          Priorize fidelidade total ao texto fornecido.
+          Só cite número de artigo quando tiver certeza absoluta.
+          Use esquemas e tópicos para facilitar memorização.
 
     - name: "dev-wordpress"
       label: "💻 Dev & WordPress"
+      description: "Especialista em PHP, CSS, WordPress, servidores e boas práticas."
       preset:
         endpoint: "openai"
         model: "gpt-4o"
         temperature: 0.1
         max_tokens: 4000
         promptPrefix: |
-          Engenheiro WordPress sênior.
-          Priorize segurança, performance, rollback e backup.
+          Você é um Engenheiro WordPress sênior.
+          Priorize segurança, performance e rollback.
+          Sempre sugira backup antes de mudanças críticas.
+          Seja objetivo: solução > código > explicação breve.
 
     - name: "translator-ptbr"
       label: "🌍 Tradutor (PT-BR)"
+      description: "Ferramenta de tradução pura, sem conversas extras."
       preset:
         endpoint: "openai"
         model: "gpt-4o-mini"
         temperature: 0.0
         max_tokens: 2000
         promptPrefix: |
-          Traduza para PT-BR mantendo sentido e formatação.
-          Não converse.
+          Traduza para Português do Brasil mantendo sentido e formatação.
+          Não converse. Apenas entregue a tradução.
 
+# =========================================================
+# ENDPOINTS DISPONÍVEIS
+# =========================================================
 endpoints:
   google:
     titleModel: "gemini-2.5-flash-lite"
