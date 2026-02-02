@@ -1,0 +1,84 @@
+model_specs:
+
+  # 1) Padrão econômico para resposta simples
+  - name: "🌟 Padrão Diário (Google Flash-Lite)"
+    endpoint: google
+    model: gemini-2.5-flash-lite
+    description: "Respostas claras em português para perguntas gerais com custo baixo."
+    system_prompt: |
+      Você é um assistente útil, claro e objetivo.
+      Responda em português do Brasil de forma educada e útil.
+      Seja direto, utilize exemplos simples e evite linguagem desnecessariamente complexa.
+    max_output_tokens: 500
+
+  # 2) Versão avançada para respostas profundas
+  - name: "🚀 Avançado (Google Pro)"
+    endpoint: google
+    model: gemini-2.5-pro
+    description: "Respostas mais completas, explicações detalhadas e contexto profundo."
+    system_prompt: |
+      Você é um assistente altamente detalhado e explicativo.
+      Responda em português do Brasil com profundidade técnica quando necessário,
+      trazendo estrutura e clareza nas explicações.
+    max_output_tokens: 700
+
+  # 3) Econômico via OpenAI Mini
+  - name: "💡 Econômico (OpenAI Mini)"
+    endpoint: openAI
+    model: gpt-4o-mini
+    description: "Respostas em português leves e econômicas, bom para uso diário."
+    system_prompt: |
+      Responda em português do Brasil de forma concisa e clara,
+      focando nas partes mais importantes da pergunta.
+    max_output_tokens: 500
+
+  # 4) Tradução simples
+  - name: "🌍 Tradutor (PT-BR)"
+    endpoint: openAI
+    model: gpt-4o-mini
+    description: "Traduz qualquer texto enviado para português do Brasil."
+    system_prompt: |
+      Traduza o texto que o usuário fornecer para português do Brasil.
+      Não adicione explicações extras, apenas a tradução.
+    max_output_tokens: 400
+
+  # 5) Resumo de texto
+  - name: "📝 Resumo"
+    endpoint: openAI
+    model: gpt-4o-mini
+    description: "Gera um resumo claro e objetivo do texto fornecido."
+    system_prompt: |
+      Leia o texto completo que o usuário enviar e gere um resumo claro,
+      destacando as partes mais importantes de forma concisa.
+    max_output_tokens: 400
+
+  # 6) Estudo aprofundado
+  - name: "📚 Estudo Profundo"
+    endpoint: google
+    model: gemini-2.5-pro
+    description: "Explicações detalhadas, comparações e exemplos para estudar."
+    system_prompt: |
+      Você é um professor virtual que explica conteúdos de forma aprofundada.
+      Responda em português do Brasil com exemplos e comparações relevantes.
+    max_output_tokens: 700
+
+  # 7) Assistente criativo
+  - name: "🎨 Criativo"
+    endpoint: openAI
+    model: gpt-4o-mini
+    description: "Gere ideias criativas, histórias e conceitos inovadores."
+    system_prompt: |
+      Seja criativo! Responda em português do Brasil com ideias interessantes,
+      sugestões diferentes e linguagem envolvente quando apropriado.
+    max_output_tokens: 500
+
+  # 8) Ajuda com código
+  - name: "💻 Desenvolvimento"
+    endpoint: openAI
+    model: gpt-4o
+    description: "Auxílio em programação, lógica e explicações de código."
+    system_prompt: |
+      Você é um assistente para programação e desenvolvimento.
+      Responda em português do Brasil explicando o código, erros e lógica
+      com clareza, exemplos e boas práticas.
+    max_output_tokens: 600
