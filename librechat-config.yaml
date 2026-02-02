@@ -1,8 +1,9 @@
-version: 1.1.6
+version: 1.1.7
+
 cache: true
 
 # =========================================================
-# CONFIGURAÇÃO DE ARQUIVOS (PDFs grandes, prints, códigos)
+# 1) CONFIGURAÇÃO DE ARQUIVOS
 # =========================================================
 fileConfig:
   endpoints:
@@ -16,7 +17,14 @@ fileConfig:
         - "text/.*"
 
 # =========================================================
-# INTERFACE LIMPA PARA USO DOMÉSTICO
+# 2) SEGURANÇA
+# =========================================================
+registration:
+  socialLogins: []
+  allowedDomains: []
+
+# =========================================================
+# 3) INTERFACE
 # =========================================================
 interface:
   customWelcome: 'Olá! 👋 Escolha uma opção no menu "Mudar Modelo" (ex: Padrão Diário).'
@@ -34,82 +42,77 @@ interface:
     openNewTab: true
 
 # =========================================================
-# MODEL SPECS (PERSONAS OFICIAIS)
+# 4) MODEL SPECS (PERSONAS)
 # =========================================================
 modelSpecs:
   enforce: true
   prioritize: true
   list:
-
     - name: "family-fast"
       label: "🌟 Padrão Diário (Rápido)"
-      description: "Para o dia a dia: receitas, ideias, e-mails e dúvidas gerais."
       default: true
+      description: "Receitas, ideias, e-mails e dúvidas gerais."
       preset:
         endpoint: "google"
         model: "gemini-2.5-flash-lite"
         temperature: 0.6
         max_tokens: 1200
         promptPrefix: |
-          Você é um assistente da família, simpático, direto e prestativo.
+          Você é um assistente da família, simpático e direto.
           Responda sempre em Português do Brasil.
           Use linguagem simples e emojis com moderação.
-          Se faltar informação, faça uma pergunta objetiva.
 
     - name: "advanced-gpt4o"
       label: "🚀 Avançado (GPT-4o)"
-      description: "Inteligência máxima para raciocínio complexo, lógica e análises profundas."
+      description: "Para problemas complexos e raciocínio lógico."
       preset:
-        endpoint: "openai"
+        endpoint: "openAI"   # <--- CORRIGIDO (Maiúsculo)
         model: "gpt-4o"
         temperature: 0.5
         max_tokens: 3500
         promptPrefix: |
-          Responda em Português do Brasil com profundidade, precisão e boa estrutura.
-          Se houver risco de erro, declare incerteza.
+          Responda em Português do Brasil com profundidade e precisão.
+          Declare incerteza quando houver risco de erro.
 
     - name: "study-law-pro"
       label: "📚 Estudo & Leis (Gemini Pro)"
-      description: "Ideal para leitura de editais, leis, PDFs grandes e resumos para concurso."
+      description: "Leitura de editais, leis e material de concurso."
       preset:
         endpoint: "google"
         model: "gemini-2.5-pro"
         temperature: 0.2
         max_tokens: 8000
         promptPrefix: |
-          Você é um professor especialista em concursos públicos e Direito.
-          Priorize fidelidade total ao texto fornecido.
-          Só cite número de artigo quando tiver certeza absoluta.
-          Use esquemas e tópicos para facilitar memorização.
+          Professor especialista em concursos e direito.
+          Só cite artigo quando tiver certeza absoluta.
+          Priorize fidelidade ao texto fornecido.
 
     - name: "dev-wordpress"
       label: "💻 Dev & WordPress"
-      description: "Especialista em PHP, CSS, WordPress, servidores e boas práticas."
+      description: "Especialista em código, segurança e servidores."
       preset:
-        endpoint: "openai"
+        endpoint: "openAI"   # <--- CORRIGIDO (Maiúsculo)
         model: "gpt-4o"
         temperature: 0.1
         max_tokens: 4000
         promptPrefix: |
-          Você é um Engenheiro WordPress sênior.
-          Priorize segurança, performance e rollback.
-          Sempre sugira backup antes de mudanças críticas.
-          Seja objetivo: solução > código > explicação breve.
+          Engenheiro WordPress sênior.
+          Priorize segurança, performance, rollback e backup.
 
     - name: "translator-ptbr"
       label: "🌍 Tradutor (PT-BR)"
-      description: "Ferramenta de tradução pura, sem conversas extras."
+      description: "Apenas traduz o texto, sem conversa."
       preset:
-        endpoint: "openai"
+        endpoint: "openAI"   # <--- CORRIGIDO (Maiúsculo)
         model: "gpt-4o-mini"
         temperature: 0.0
         max_tokens: 2000
         promptPrefix: |
-          Traduza para Português do Brasil mantendo sentido e formatação.
-          Não converse. Apenas entregue a tradução.
+          Traduza para PT-BR mantendo sentido e formatação.
+          Não converse.
 
 # =========================================================
-# ENDPOINTS DISPONÍVEIS
+# 5) ENDPOINTS TÉCNICOS
 # =========================================================
 endpoints:
   google:
@@ -117,7 +120,7 @@ endpoints:
     models:
       default: ["gemini-2.5-flash-lite", "gemini-2.5-pro"]
 
-  openai:
+  openAI:  # <--- CORRIGIDO (ERA "openai", VIROU "openAI")
     titleModel: "gpt-4o-mini"
     models:
       default: ["gpt-4o", "gpt-4o-mini"]
