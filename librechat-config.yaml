@@ -1,84 +1,103 @@
-model_specs:
+version: 1.1.5
+cache: true
 
-  # 1) Padrão econômico para resposta simples
-  - name: "🌟 Padrão Diário (Google Flash-Lite)"
-    endpoint: google
-    model: gemini-2.5-flash-lite
-    description: "Respostas claras em português para perguntas gerais com custo baixo."
-    system_prompt: |
-      Você é um assistente útil, claro e objetivo.
-      Responda em português do Brasil de forma educada e útil.
-      Seja direto, utilize exemplos simples e evite linguagem desnecessariamente complexa.
-    max_output_tokens: 500
+fileConfig:
+  endpoints:
+    default:
+      fileLimit: 10
+      fileSizeLimit: 100
+      totalSizeLimit: 400
+      supportedMimeTypes:
+        - "image/.*"
+        - "application/pdf"
+        - "text/.*"
 
-  # 2) Versão avançada para respostas profundas
-  - name: "🚀 Avançado (Google Pro)"
-    endpoint: google
-    model: gemini-2.5-pro
-    description: "Respostas mais completas, explicações detalhadas e contexto profundo."
-    system_prompt: |
-      Você é um assistente altamente detalhado e explicativo.
-      Responda em português do Brasil com profundidade técnica quando necessário,
-      trazendo estrutura e clareza nas explicações.
-    max_output_tokens: 700
+interface:
+  customWelcome: 'Olá! 👋 Escolha uma opção no menu "Mudar Modelo" (ex: Padrão Diário).'
 
-  # 3) Econômico via OpenAI Mini
-  - name: "💡 Econômico (OpenAI Mini)"
-    endpoint: openAI
-    model: gpt-4o-mini
-    description: "Respostas em português leves e econômicas, bom para uso diário."
-    system_prompt: |
-      Responda em português do Brasil de forma concisa e clara,
-      focando nas partes mais importantes da pergunta.
-    max_output_tokens: 500
+  modelSelect: true
+  presets: true
+  sidePanel: true
+  parameters: false
 
-  # 4) Tradução simples
-  - name: "🌍 Tradutor (PT-BR)"
-    endpoint: openAI
-    model: gpt-4o-mini
-    description: "Traduz qualquer texto enviado para português do Brasil."
-    system_prompt: |
-      Traduza o texto que o usuário fornecer para português do Brasil.
-      Não adicione explicações extras, apenas a tradução.
-    max_output_tokens: 400
+  privacyPolicy:
+    externalUrl: "https://librechat.ai/privacy-policy"
+    openNewTab: true
+  termsOfService:
+    externalUrl: "https://librechat.ai/tos"
+    openNewTab: true
 
-  # 5) Resumo de texto
-  - name: "📝 Resumo"
-    endpoint: openAI
-    model: gpt-4o-mini
-    description: "Gera um resumo claro e objetivo do texto fornecido."
-    system_prompt: |
-      Leia o texto completo que o usuário enviar e gere um resumo claro,
-      destacando as partes mais importantes de forma concisa.
-    max_output_tokens: 400
+modelSpecs:
+  enforce: true
+  prioritize: true
+  list:
 
-  # 6) Estudo aprofundado
-  - name: "📚 Estudo Profundo"
-    endpoint: google
-    model: gemini-2.5-pro
-    description: "Explicações detalhadas, comparações e exemplos para estudar."
-    system_prompt: |
-      Você é um professor virtual que explica conteúdos de forma aprofundada.
-      Responda em português do Brasil com exemplos e comparações relevantes.
-    max_output_tokens: 700
+    - name: "family-fast"
+      label: "🌟 Padrão Diário (Rápido)"
+      default: true
+      description: "Receitas, ideias, e-mails e dúvidas gerais."
+      preset:
+        endpoint: "google"
+        model: "gemini-2.5-flash-lite"
+        temperature: 0.6
+        max_tokens: 1200
+        promptPrefix: |
+          Você é um assistente da família, simpático e direto.
+          Responda sempre em Português do Brasil.
+          Use linguagem simples e emojis com moderação.
 
-  # 7) Assistente criativo
-  - name: "🎨 Criativo"
-    endpoint: openAI
-    model: gpt-4o-mini
-    description: "Gere ideias criativas, histórias e conceitos inovadores."
-    system_prompt: |
-      Seja criativo! Responda em português do Brasil com ideias interessantes,
-      sugestões diferentes e linguagem envolvente quando apropriado.
-    max_output_tokens: 500
+    - name: "advanced-gpt4o"
+      label: "🚀 Avançado (GPT-4o)"
+      preset:
+        endpoint: "openai"
+        model: "gpt-4o"
+        temperature: 0.5
+        max_tokens: 3500
+        promptPrefix: |
+          Responda em Português do Brasil com profundidade e precisão.
+          Declare incerteza quando houver risco de erro.
 
-  # 8) Ajuda com código
-  - name: "💻 Desenvolvimento"
-    endpoint: openAI
-    model: gpt-4o
-    description: "Auxílio em programação, lógica e explicações de código."
-    system_prompt: |
-      Você é um assistente para programação e desenvolvimento.
-      Responda em português do Brasil explicando o código, erros e lógica
-      com clareza, exemplos e boas práticas.
-    max_output_tokens: 600
+    - name: "study-law-pro"
+      label: "📚 Estudo & Leis (Gemini Pro)"
+      preset:
+        endpoint: "google"
+        model: "gemini-2.5-pro"
+        temperature: 0.2
+        max_tokens: 8000
+        promptPrefix: |
+          Professor especialista em concursos e direito.
+          Só cite artigo quando tiver certeza absoluta.
+          Priorize fidelidade ao texto fornecido.
+
+    - name: "dev-wordpress"
+      label: "💻 Dev & WordPress"
+      preset:
+        endpoint: "openai"
+        model: "gpt-4o"
+        temperature: 0.1
+        max_tokens: 4000
+        promptPrefix: |
+          Engenheiro WordPress sênior.
+          Priorize segurança, performance, rollback e backup.
+
+    - name: "translator-ptbr"
+      label: "🌍 Tradutor (PT-BR)"
+      preset:
+        endpoint: "openai"
+        model: "gpt-4o-mini"
+        temperature: 0.0
+        max_tokens: 2000
+        promptPrefix: |
+          Traduza para PT-BR mantendo sentido e formatação.
+          Não converse.
+
+endpoints:
+  google:
+    titleModel: "gemini-2.5-flash-lite"
+    models:
+      default: ["gemini-2.5-flash-lite", "gemini-2.5-pro"]
+
+  openai:
+    titleModel: "gpt-4o-mini"
+    models:
+      default: ["gpt-4o", "gpt-4o-mini"]
